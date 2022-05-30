@@ -1,11 +1,26 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
-const ViewSection = () => {
+const ViewSection = ({ setShowViewSection, showViewSection }) => {
+    let viewsectionStatus;
+    showViewSection ? viewsectionStatus = ' hidden ' : viewsectionStatus = "";
+    console.log(viewsectionStatus);
+    console.log(showViewSection);
+
     return (
         <div>
-            <div class="card w-full bg-base-100 shadow-xl h-[100vh]">
-                <div class="card-body">
-                    <h2 class="card-title">Card title!</h2>
+            {
+                window.innerWidth < 576 || <div className='flex justify-end'>
+                    <label
+                        for="my-drawer-4"
+                        class="drawer-button text-3xl text-primary "
+                        onClick={() => setShowViewSection(!showViewSection)}
+                    ><FontAwesomeIcon icon={faCircleInfo} /></label>
+                </div>
+            }
+            <div class={`card w-full bg-base-100 shadow-xl h-[96vh] shadow-lg `}>
+                <div class={`card-body `}>
                     <div className='border h-full p-2 border-black'>View Section</div>
                     <div class="card-actions mt-auto justify-end grid grid-cols-[100fr,1fr]">
                         <div className='w-full'>
@@ -18,6 +33,8 @@ const ViewSection = () => {
                     </div>
                 </div>
             </div>
+
+
         </div>
     );
 };
