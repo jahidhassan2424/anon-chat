@@ -14,14 +14,16 @@ const Home = () => {
                     <UserProfile></UserProfile>
                 </div>
                 <div>
-                    <div className='grid grid-cols-[10fr,1fr] px-3'>
-                        <h2 class="card-title">Card title!</h2>
-                        <label
-                            for="my-drawer-4"
-                            class="drawer-button btn btn-primary "
-                            onClick={() => setShowViewSection(!showViewSection)}
-                        ><FontAwesomeIcon icon={faCircleInfo} /></label>
-                    </div>
+                    {
+                        window.innerWidth < 576 && <div className='grid grid-cols-[10fr,1fr] px-3'>
+                            <h2 class="card-title">Card title!</h2>  {/* Card titel will be the name of other person or group name*/}
+                            <label
+                                for="my-drawer-4"
+                                class="drawer-button text-4xl text-primary"
+                                onClick={() => setShowViewSection(!showViewSection)}
+                            ><FontAwesomeIcon icon={faCircleInfo} /></label>
+                        </div>
+                    }
                     {
                         window.innerWidth < 576
                             ?
