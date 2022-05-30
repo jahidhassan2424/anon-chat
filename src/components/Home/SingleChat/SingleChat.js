@@ -10,7 +10,7 @@ import auth from './../../../firebase.init';
 const SingleChat = () => {
     const [showRightDrawer, setShowRightDrawer] = useState(true)
     const [user] = useAuthState(auth);
-    const chats = [];
+
 
     return (
         <div>
@@ -47,7 +47,7 @@ const SingleChat = () => {
                                 <ViewSection
                                     setShowViewSection={setShowRightDrawer}
                                     showViewSection={showRightDrawer}
-                                    chats={chats}
+
                                 ></ViewSection>
                                 :
                                 <OtherPerson
