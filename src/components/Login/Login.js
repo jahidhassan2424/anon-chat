@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../../images/logo.png';
 import { Link } from 'react-router-dom';
+import SocialLoginModal from '../Shared/SocialLoginModal';
 const Login = () => {
+
+    //open or close social login modal
+    const [socialLoginModal, setSocialLoginModal] = useState(false)
+
     return (
         <div className='flex justify-center mt-20'>
             <div class="card card-compact w-96 bg-base-100 shadow-xl">
                 <h1 className='text-5xl font-bold text-center mb-5'>Please Login</h1>
                 <figure><img src={logo} alt="Shoes" /></figure>
                 <div class="card-body">
-
+                    {/* Toggle Social Sign In  */}
+                    <label onClick={() => setSocialLoginModal(true)} for="socialLoginModal" class="btn btn-outline modal-button">Social Sign In</label>
                     {/* Email Field */}
                     <div class="form-control w-full ">
                         <label class="label">
@@ -36,6 +42,11 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            {
+                socialLoginModal && <SocialLoginModal
+                    setSocialLoginModal={setSocialLoginModal}
+                ></SocialLoginModal>
+            }
         </div>
     );
 };

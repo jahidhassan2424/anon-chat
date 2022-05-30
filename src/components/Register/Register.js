@@ -4,11 +4,19 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from './../../firebase.init';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import googleLogo from '../../images/google-brands.svg';
+import { faFacebook, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import SocialLoginModal from '../Shared/SocialLoginModal';
 
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
     const [socialSignIn, setSocialSignIn] = useState(false);
+
+
+    //Open and close modal
+    const [socialLoginModal, setSocialLoginModal] = useState(false)
 
     //Create account with email and password
     const [
@@ -27,10 +35,10 @@ const Login = () => {
                 <h1 className='text-5xl font-bold text-center mb-5'>Register</h1>
                 <figure><img src={logo} alt="Shoes" /></figure>
 
-                {/* Toggle Social Sign In  */}
-                <label for="my-modal-6" class="btn btn-outline mx-5 modal-button">Social Sign In</label>
 
                 <div class="card-body">
+                    {/* Toggle Social Sign In  */}
+                    <label onClick={() => setSocialLoginModal(true)} for="socialLoginModal" class="btn btn-outline modal-button">Social Sign In</label>
 
                     {/* Name Field */}
                     <div class="form-control w-full ">
@@ -67,24 +75,14 @@ const Login = () => {
                     </div>
                     <div class="divider">OR</div>
                 </div>
-                {/* <!-- The button to open modal --> */}
-
-                {/* <!-- Put this part before </body> tag --> */}
 
             </div>
 
-            <input type="checkbox" id="my-modal-6" class="modal-toggle" />
-            <div class="modal modal-bottom sm:modal-middle">
-                <div class="modal-box">
-                    <h1 className='text-3xl font-bold mb-5 text-center'>Select a sign in option</h1>
-                    <button class="text-lg btn btn-outline w-full mb-3 ">Google Sign In</button>
-                    <button class="text-lg btn btn-outline w-full mb-3 ">Facebook Sign In</button>
-                    <button class="text-lg btn btn-outline w-full">Github Sign In</button>
-                    <div class="modal-action">
-                        <label for="my-modal-6" class="btn">Yay!</label>
-                    </div>
-                </div>
-            </div>
+            {
+                socialLoginModal && <SocialLoginModal
+                    setSocialLoginModal={setSocialLoginModal}
+                ></SocialLoginModal>
+            }
         </div >
     );
 };
