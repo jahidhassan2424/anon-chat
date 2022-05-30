@@ -5,7 +5,8 @@ import ViewSection from './ViewSection/ViewSection';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 const Home = () => {
-    const [showViewSection, setShowViewSection] = useState(true)
+    const [showRightDrawer, setShowRightDrawer] = useState(true)
+    const [showUserProfile, setShowUserProfile] = useState(false)
 
     return (
         <div>
@@ -20,39 +21,42 @@ const Home = () => {
                             <label
                                 for="my-drawer-4"
                                 class="drawer-button text-4xl text-primary"
-                                onClick={() => setShowViewSection(!showViewSection)}
+                                onClick={() => {
+                                    setShowRightDrawer(!showRightDrawer)
+                                    setShowUserProfile = (!showUserProfile)
+                                }}
                             ><FontAwesomeIcon icon={faCircleInfo} /></label>
                         </div>
                     }
                     {
                         window.innerWidth < 576
                             ?
-                            showViewSection
+                            showRightDrawer
                                 ?
                                 <ViewSection
-                                    setShowViewSection={setShowViewSection}
-                                    showViewSection={showViewSection}
+                                    setShowViewSection={setShowRightDrawer}
+                                    showViewSection={showRightDrawer}
                                 ></ViewSection>
                                 :
                                 <OtherPerson
-                                    setShowViewSection={setShowViewSection}
-                                    showViewSection={showViewSection}
+                                    setShowViewSection={setShowRightDrawer}
+                                    showViewSection={showRightDrawer}
 
                                 ></OtherPerson>
                             :
-                            showViewSection
+                            (showRightDrawer && !showUserProfile)
                                 ?
                                 <div className={`grid grid-cols-[4fr,1fr]`}>
                                     <div >
                                         <ViewSection
-                                            setShowViewSection={setShowViewSection}
-                                            showViewSection={showViewSection}
+                                            setShowViewSection={setShowRightDrawer}
+                                            showViewSection={showRightDrawer}
                                         ></ViewSection>
                                     </div>
                                     <div>
                                         <OtherPerson
-                                            setShowViewSection={setShowViewSection}
-                                            showViewSection={showViewSection}
+                                            setShowViewSection={setShowRightDrawer}
+                                            showViewSection={showRightDrawer}
                                         ></OtherPerson>
                                     </div>
 
@@ -61,8 +65,8 @@ const Home = () => {
                                 <div >
                                     <div >
                                         <ViewSection
-                                            setShowViewSection={setShowViewSection}
-                                            showViewSection={showViewSection}
+                                            setShowViewSection={setShowRightDrawer}
+                                            showViewSection={showRightDrawer}
                                         ></ViewSection>
                                     </div>
 
