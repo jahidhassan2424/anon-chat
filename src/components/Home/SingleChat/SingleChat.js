@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -10,6 +10,17 @@ import auth from './../../../firebase.init';
 const SingleChat = () => {
     const [showRightDrawer, setShowRightDrawer] = useState(true)
     const [user] = useAuthState(auth);
+    const [isWindowSmall, setIsWindowSmall] = useState(false);
+
+    const widthMeasurement = () => {
+        setIsWindowSmall(window.innerWidth < 576)
+    }
+    console.log(isWindowSmall);
+    useEffect(() => {
+        setIsWindowSmall()
+        window.addEventListener('resize', widthMeasurement);
+        return () => window.removeEventListener('resize', widthMeasurement);
+    }, [])
 
 
     return (
@@ -20,7 +31,7 @@ const SingleChat = () => {
                 </div>
                 <div>
                     {
-                        window.innerWidth < 576 && <div className='grid grid-cols-[1fr,10fr,1fr] px-3 justify-center items-center justify-items-center'>
+                        isWindowSmall && <div className='grid grid-cols-[1fr,10fr,1fr] px-3 justify-center items-center justify-items-center'>
                             <div>
                                 <div class="avatar">
                                     <div class="w-full rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
@@ -40,7 +51,7 @@ const SingleChat = () => {
                         </div>
                     }
                     {
-                        window.innerWidth < 576
+                        isWindowSmall
                             ?
                             showRightDrawer
                                 ?
@@ -56,8 +67,19 @@ const SingleChat = () => {
 
                                 ></OtherPerson>
                             :
-                            (showRightDrawer)
+                            !showRightDrawer
                                 ?
+                                <div >
+                                    <div >
+                                        <ViewSection
+                                            setShowViewSection={setShowRightDrawer}
+                                            showViewSection={showRightDrawer}
+                                        ></ViewSection>
+                                    </div>
+
+
+                                </div>
+                                :
                                 <div className={`grid grid-cols-[4fr,1fr]`}>
                                     <div >
                                         <ViewSection
@@ -71,17 +93,6 @@ const SingleChat = () => {
                                             showViewSection={showRightDrawer}
                                         ></OtherPerson>
                                     </div>
-
-                                </div>
-                                :
-                                <div >
-                                    <div >
-                                        <ViewSection
-                                            setShowViewSection={setShowRightDrawer}
-                                            showViewSection={showRightDrawer}
-                                        ></ViewSection>
-                                    </div>
-
 
                                 </div>
                     }

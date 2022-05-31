@@ -14,7 +14,7 @@ const Login = () => {
                 <figure><img src={logo} alt="Shoes" /></figure>
                 <div class="card-body">
                     {/* Toggle Social Sign In  */}
-                    <label onClick={() => setSocialLoginModal(true)} for="socialLoginModal" class="btn btn-outline modal-button">Social Sign In</label>
+                    <label onClick={() => setSocialLoginModal(true)} for="socialLoginModal" class="btn btn-outline modal-button bg-neutral text-white font-bold">Social Sign In</label>
                     {/* Email Field */}
                     <div class="form-control w-full ">
                         <label class="label">
@@ -35,7 +35,7 @@ const Login = () => {
                         {/* Show password will be here */}
                     </div>
                     <div class="card-actions w-full">
-                        <button class="btn btn-primary w-full mt-5">Buy Now</button>
+                        <button class="btn btn-primary w-full mt-5 text-white font-bold">LOGIN</button>
                     </div>
                     <div>
                         <p className='text-lg'>Dont have an account? <Link to="/register" className='text-secondary font-bold'>Create an Account</Link></p>
